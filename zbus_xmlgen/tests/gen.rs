@@ -1,5 +1,6 @@
 // use pretty_assertions::assert_eq;
-use std::{env, error::Error, io::Write, path::Path};
+// use std::{env, io::Write, path::Path};
+use std::error::Error;
 
 use zbus_xml::Node;
 use zbus_xmlgen::GenTrait;
@@ -19,19 +20,19 @@ macro_rules! gen_diff {
         }
         .to_string();
 
-        if env::var("TEST_OVERWRITE").is_ok() {
-            let path = Path::new(env!("CARGO_MANIFEST_DIR"))
-                .join("tests")
-                .join("data")
-                .join($outfile);
-            let mut f = std::fs::OpenOptions::new()
-                .write(true)
-                .truncate(true)
-                .open(path)?;
-            // f.write_all(gen.as_bytes())?;
-            f.flush()?;
-            return Ok(());
-        }
+        // if env::var("TEST_OVERWRITE").is_ok() {
+        //     let path = Path::new(env!("CARGO_MANIFEST_DIR"))
+        //         .join("tests")
+        //         .join("data")
+        //         .join($outfile);
+        //     let mut f = std::fs::OpenOptions::new()
+        //         .write(true)
+        //         .truncate(true)
+        //         .open(path)?;
+        //     // f.write_all(gen.as_bytes())?;
+        //     f.flush()?;
+        //     return Ok(());
+        // }
 
         assert_eq!(gen, expected);
         Ok(())
